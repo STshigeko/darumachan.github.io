@@ -1,0 +1,165 @@
+/* ダルマちゃんめだか 共通スタイル */
+
+:root {
+  --bg: #FAFAF8;
+  --header-bg: #FFFFFF;
+  --ink: #222222;
+  --radius: 4px;
+  --gutter: 20px;
+  --max-width: 1000px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.9;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* ヘッダー（サイト名の帯） */
+.site-header {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--ink);
+}
+
+.site-header__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 16px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.site-title {
+  margin: 0;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.site-title a {
+  text-decoration: none;
+}
+
+.site-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.site-nav a {
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  border-bottom-color: var(--ink);
+}
+
+/* メイン */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px var(--gutter);
+}
+
+/* ボタン：主要は黒塗り、それ以外は黒枠 */
+.btn {
+  display: inline-block;
+  min-width: 160px;
+  padding: 12px 28px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--ink);
+  color: var(--header-bg);
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ホーム */
+.hero {
+  margin: 0;
+}
+
+/* 横長(4:3)に切り抜く。メダカが写っている下寄りの位置を残す */
+.hero img {
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 50% 60%;
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+
+.intro {
+  text-align: center;
+  padding-top: 32px;
+}
+
+.intro p {
+  margin: 0 auto 28px;
+  max-width: 34em;
+}
+
+.intro__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* フッター */
+.site-footer {
+  border-top: 1px solid var(--ink);
+  padding: 24px var(--gutter);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
