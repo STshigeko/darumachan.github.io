@@ -120,24 +120,76 @@ a {
 }
 
 /* ホーム */
+/* 画面の横幅いっぱいの黒い帯。色は写真の背景（容器の黒）になじむ色 */
 .hero {
+  position: relative;
   margin: 0;
+  padding: 28px var(--gutter);
+  background: #1a1a18;
 }
 
-/* 横長(4:3)に切り抜く。メダカが写っている下寄りの位置を残す */
+/* キャッチコピー。スマホなど狭い画面では、写真のすぐ下に横書きで1行で表示する */
+.hero__copy {
+  margin: 16px 0 0;
+  color: #FFFFFF;
+  font-family: "Yuji Syuku", "Shippori Mincho", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em; /* 文字間の余白が末尾に付く分、中央からずれないように */
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hero__copy br {
+  display: none;
+}
+
+/* 広い画面では、帯の左の余白に縦書き（写真と重ならない幅のときだけ） */
+@media (min-width: 960px) {
+  .hero__copy {
+    position: absolute;
+    top: 50%;
+    left: max(32px, calc((100% - var(--max-width)) / 2 + var(--gutter)));
+    margin: 0;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    letter-spacing: 0.3em;
+    text-indent: 0;
+    text-align: start;
+  }
+
+  .hero__copy br {
+    display: inline;
+  }
+}
+
+/* 写真は切り抜かず全体を表示。元の縦横比のまま、高さは最大500px。
+   スマホでは画面幅に合わせて縮む。 */
 .hero img {
-  width: 100%;
-  max-width: 720px;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  object-position: 50% 60%;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 500px;
   margin: 0 auto;
-  border-radius: var(--radius);
+  /* ふちを黒い帯に向かってぼかす。メダカは左右とも端から15%以上内側にあるので、
+     左右のぼかしは12%まで。上は尾びれが端から3%ほどの所にあるので2.5%まで、
+     下は写真の下側に余白をとってあるので6%まで。いずれもメダカにかからないようにしている */
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 2.5%, #000 94%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 2.5%, #000 94%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .intro {
   text-align: center;
-  padding-top: 32px;
 }
 
 .intro p {
