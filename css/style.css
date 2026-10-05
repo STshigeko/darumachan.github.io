@@ -132,7 +132,7 @@ a {
 .hero__copy {
   margin: 16px 0 0;
   color: #FFFFFF;
-  font-family: "Yuji Syuku", "Shippori Mincho", serif;
+  font-family: "Klee One", "Yuji Syuku", serif; /* スマホの横書きは Klee One */
   font-size: 1.1rem;
   font-weight: 400;
   letter-spacing: 0.2em;
@@ -154,6 +154,7 @@ a {
     margin: 0;
     transform: translateY(-50%);
     writing-mode: vertical-rl;
+    font-family: "Yuji Syuku", "Shippori Mincho", serif; /* パソコンの縦書きは Yuji Syuku */
     font-size: 1.5rem;
     line-height: 1.7;
     letter-spacing: 0.3em;
@@ -166,18 +167,29 @@ a {
   }
 }
 
-/* 写真は切り抜かず全体を表示。元の縦横比のまま、高さは最大500px。
-   スマホでは画面幅に合わせて縮む。 */
-.hero img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 500px;
+/* 写真スライド。2枚とも同じ縦横比(6:5)で切り抜いてあり、同じ大きさの枠に重ねて、
+   不透明度を変えて切り替える（前の写真が消えてから、次の写真が出てくる）。高さは最大500px（幅600px）、
+   スマホでは画面幅に合わせて縮む。切り替えは js/slider.js が is-active を付け替える。 */
+.hero__slides {
+  position: relative;
+  width: min(100%, 600px);
+  aspect-ratio: 6 / 5;
   margin: 0 auto;
-  /* ふちを黒い帯に向かってぼかす。メダカは左右とも端から15%以上内側にあるので、
-     左右のぼかしは12%まで。上は尾びれが端から3%ほどの所にあるので2.5%まで、
-     下は写真の下側に余白をとってあるので6%まで。いずれもメダカにかからないようにしている */
+  touch-action: pan-y; /* 縦のスクロールはそのまま。横にすべらせる動きは slider.js が受け取る */
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 動画など、縦横比の違うスライドを足しても枠いっぱいに収める */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out; /* 消えるとき：0.5秒 */
+  /* ふちを黒い帯に向かってぼかす（2枚とも同じ）。メダカは左右とも端から12%以上内側にあるので、
+     左右のぼかしは12%まで。上下は余白を7%以上とってあるので、上2.5%・下6%まで。
+     いずれもメダカにかからないようにしている */
   -webkit-mask-image:
     linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%),
     linear-gradient(to bottom, transparent 0, #000 2.5%, #000 94%, transparent 100%);
@@ -188,13 +200,77 @@ a {
   mask-composite: intersect;
 }
 
+/* 出てくるとき：前の写真が消え終わる0.5秒後から、0.5秒かけて出てくる */
+.hero__slide.is-active {
+  opacity: 1;
+  transition-delay: 0.5s;
+}
+
+/* 矢印を押したときは、動きなしですぐに切り替える（js/slider.js が一瞬だけ付ける） */
+.hero__slides.is-instant .hero__slide,
+.hero__slides.is-instant .hero__slide.is-active {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide,
+  .hero__slide.is-active {
+    transition: none;
+  }
+}
+
+/* 写真の下の「‹　1 / 2　›」（左右の矢印で前後の写真へ、真ん中は今何枚目か）。
+   js/slider.js が作る。白い細い文字。矢印のボタンは、スマホでも押しやすい48px四方 */
+.hero__pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-top: 12px;
+  color: #FFFFFF;
+  font-family: "Shippori Mincho", serif;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.hero__arrow {
+  width: 44px;
+  height: 48px;
+  margin: 0 -6px; /* 数字との間をつめる（押せる範囲は44×48pxのまま） */
+  padding: 0 0 8px; /* 矢印の記号は文字の中で下に寄るので、数字と高さがそろうよう少し上げる */
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hero__arrow:hover {
+  opacity: 0.7;
+}
+
+.hero__arrow:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: -2px;
+}
+
+.hero__count {
+  font-size: 1.1rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
 .intro {
   text-align: center;
 }
 
 .intro p {
   margin: 0 auto 28px;
-  max-width: 34em;
+  max-width: 37em;
 }
 
 .intro__buttons {

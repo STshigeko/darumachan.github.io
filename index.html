@@ -7,7 +7,7 @@
   <meta name="description" content="ダルマメダカ専門のサイト「ダルマちゃんめだか」。飼育しているダルマメダカをご紹介しています。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Shippori+Mincho:wght@700&family=Yuji+Syuku&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Shippori+Mincho:wght@400;700&family=Yuji+Syuku&family=Klee+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -27,7 +27,10 @@
 
   <main>
     <figure class="hero">
-      <img src="img/web/amaterasu3-hero.jpg" alt="黒い容器を上から撮影した、アマテラスダルマのメダカ3匹">
+      <div class="hero__slides">
+        <img class="hero__slide is-active" src="img/web/amaterasu3-hero.jpg" alt="黒い容器を上から撮影した、アマテラスダルマのメダカ3匹">
+        <img class="hero__slide" src="img/web/taakoizuguriin1-hero.jpg" alt="黒い容器を上から撮影した、ターコイズグリーンのメダカ2匹">
+      </div>
       <p class="hero__copy">水の中の、<br>ちいさな宝石。</p>
     </figure>
 
@@ -47,5 +50,7 @@
   <footer class="site-footer">
     <p>&copy; ダルマちゃんめだか</p>
   </footer>
+
+  <script src="js/slider.js" defer></script>
 </body>
 </html>
