@@ -187,17 +187,8 @@ a {
   object-fit: cover; /* 動画など、縦横比の違うスライドを足しても枠いっぱいに収める */
   opacity: 0;
   transition: opacity 0.5s ease-in-out; /* 消えるとき：0.5秒 */
-  /* ふちを黒い帯に向かってぼかす（2枚とも同じ）。メダカは左右とも端から12%以上内側にあるので、
-     左右のぼかしは12%まで。上下は余白を7%以上とってあるので、上2.5%・下6%まで。
-     いずれもメダカにかからないようにしている */
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 2.5%, #000 94%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 2.5%, #000 94%, transparent 100%);
-  mask-composite: intersect;
+  /* ふちを黒い帯になじませるぼかしは、写真そのものに焼き込んである（img/web/*-hero.jpg）。
+     CSSのマスクでぼかすと、四隅が丸く欠けて見えるため。元の（ぼかし前の）写真は img/web/src/ */
 }
 
 /* 出てくるとき：前の写真が消え終わる0.5秒後から、0.5秒かけて出てくる */
@@ -271,6 +262,11 @@ a {
 .intro p {
   margin: 0 auto 28px;
   max-width: 37em;
+}
+
+/* 紹介文は、文節の途中で折り返さない（狭い画面では文節の切れ目で折り返す） */
+.phrase {
+  display: inline-block;
 }
 
 .intro__buttons {
