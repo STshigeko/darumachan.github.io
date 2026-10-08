@@ -276,6 +276,76 @@ a {
   gap: 16px;
 }
 
+/* 品種紹介ページ */
+.page-title {
+  margin: 0 0 20px;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.page-intro {
+  margin: 0;
+  text-align: center;
+}
+
+/* 品種のカード：スマホは1列、タブレットは2列、パソコンは3列 */
+.variety-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 24px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .variety-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .variety-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 写真は、縦横比6:5に切りそろえてあり、ふちのぼかしは弱めに焼き込んである（img/web/*-card-soft.jpg）。
+   角を少し丸くして、うすい影をつける */
+.variety__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 6 / 5;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16);
+}
+
+.variety__name {
+  margin: 16px 0 4px;
+  font-family: "Shippori Mincho", serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.variety__text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.page-note {
+  margin: 56px 0 0;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
 /* フッター */
 .site-footer {
   border-top: 1px solid var(--ink);
