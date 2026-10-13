@@ -350,11 +350,40 @@ a {
 /* フッター */
 .site-footer {
   border-top: 1px solid var(--ink);
-  padding: 24px var(--gutter);
-  text-align: center;
+  color: #666666;
   font-size: 0.85rem;
+}
+
+/* メニューは左端、コピーライトは右端（ヘッダーと同じ位置） */
+.site-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+/* フッターのメニュー：コピーライトと同じ大きさ・細い文字・下線なし */
+.site-footer .site-nav a {
+  font-size: inherit;
+  font-weight: 400;
+  border-bottom: 0;
 }
 
 .site-footer p {
   margin: 0;
+}
+
+/* ショップ：白背景・黒文字、見出しは画面の上半分に配置 */
+.page-shop {
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: underline;
 }
