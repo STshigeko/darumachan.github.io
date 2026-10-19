@@ -276,6 +276,26 @@ a {
   gap: 16px;
 }
 
+/* ホーム：フッターの線の上の文章（あいさつ文と同じ大きさ） */
+.charm {
+  padding-top: 0;
+  text-align: center;
+}
+
+/* あいさつ文・ボタン・見出しの間は28px、見出しと紹介文の間はそれより少し狭い20px */
+.intro {
+  padding-bottom: 28px;
+}
+
+.charm .page-title {
+  margin-bottom: 20px;
+}
+
+.charm p {
+  margin: 0 auto;
+  max-width: 37em;
+}
+
 /* 品種紹介ページ */
 .page-title {
   margin: 0 0 20px;
