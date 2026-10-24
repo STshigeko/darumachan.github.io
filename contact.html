@@ -21,6 +21,8 @@
     .contact-form textarea { resize: vertical; }
     .contact-form__submit { display: block; margin: 0 auto; padding: 12px 48px; font: inherit; font-weight: 700; color: #fff; background: var(--ink); border: 0; border-radius: var(--radius); cursor: pointer; }
     .contact-form__submit:hover { opacity: 0.8; }
+    .contact-form__submit:disabled { background: #999; cursor: not-allowed; opacity: 1; }
+    .contact-form__notice { margin: 0 0 24px; font-weight: 700; text-align: center; }
   </style>
 </head>
 <body class="page-shop">
@@ -42,6 +44,8 @@
     <h2 class="page-title">お問い合わせ</h2>
 
     <form class="contact-form" action="send_mail.php" method="post">
+      <p class="contact-form__notice">現在、お問い合わせの受付を準備中です。</p>
+
       <div class="contact-form__field">
         <label for="name">お名前 <span class="contact-form__required">必須</span></label>
         <input type="text" id="name" name="name" required autocomplete="name">
@@ -58,7 +62,7 @@
         <textarea id="message" name="message" rows="8" required></textarea>
       </div>
 
-      <button type="submit" class="contact-form__submit">送信する</button>
+      <button type="submit" class="contact-form__submit" disabled>送信する</button>
     </form>
   </main>
 
